@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EAP · Cotizador Mayorista</title>
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="topbar">
+    <img src="./logo-eap.png" alt="EAP" class="logo" onerror="this.style.display='none'"/>
+    <h1>Cotizador mayorista</h1>
+    <div class="spacer"></div>
+    <button id="btn-export" class="btn primary">Exportar PDF</button>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>Datos del presupuesto</h2>
+      <div class="grid two">
+        <label>Cliente
+          <input id="cliente" type="text" placeholder="Nombre de la empresa o contacto" />
+        </label>
+        <label>Comercial
+          <input id="comercial" type="text" placeholder="Tu nombre" />
+        </label>
+      </div>
+      <div class="grid two">
+        <label>Fecha
+          <input id="fecha" type="date" />
+        </label>
+        <label>Notas
+          <input id="notas" type="text" placeholder="Entrega, validez, condiciones..." />
+        </label>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Añadir productos</h2>
+      <div class="grid three">
+        <label>Producto
+          <input id="buscador" list="productos" placeholder="Busca por nombre..." autocomplete="off"/>
+          <datalist id="productos"></datalist>
+        </label>
+        <label>Cantidad (kg)
+          <input id="kg" type="number" min="0" step="0.5" value="1" />
+        </label>
+        <button id="btn-add" class="btn">Añadir</button>
+      </div>
+      <small class="muted">Precios base: “Precio final por kg (sin porte)” de Notion. Puedes añadir un coste de porte total si corresponde.</small>
+    </section>
+
+    <section class="card">
+      <div class="table-wrap">
+        <table id="tabla">
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th class="num">€/kg</th>
+              <th class="num">kg</th>
+              <th class="num">Importe</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+          <tfoot>
+            <tr>
+              <td colspan="3" class="num">Subtotal</td>
+              <td class="num" id="subtotal">0,00 €</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td colspan="3" class="num">Porte (opcional)</td>
+              <td class="num">
+                <input id="porteTotal" type="number" min="0" step="0.01" value="0" class="inline-input" />
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td colspan="3" class="num total">TOTAL</td>
+              <td class="num total" id="total">0,00 €</td>
+              <td></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <!-- jsPDF + autoTable (CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.2/dist/jspdf.plugin.autotable.min.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
