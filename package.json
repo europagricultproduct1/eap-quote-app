@@ -1,0 +1,14 @@
+{
+  "name": "eap-quote-app",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "dev": "netlify dev",
+    "build": "echo 'Static build'",
+    "start": "netlify dev"
+  },
+  "dependencies": {
+    "@notionhq/client": "^2.2.15"
+  }
+}
